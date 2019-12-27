@@ -7,29 +7,67 @@ This `docs/` directory should contain all of the documents associated with the r
 
 The `docs/source/` directory contains all of the documentation that is built and hosted on readthedocs. Based on the maintainer's discretion, some docs may not be necessary to build on readthedocs, and can exist within the `docs/` directory but outside of the `source/` directory. 
 
+블라블라
 
-## How to Add Documentation
-For new features and pull requests, maintainers should make sure that the **contributor has added an explanation for their changes in the docs folder before merging the PR.**
-  
-Contributors should add a new file to the docs/source/ folder or write an addition to a current file that explains what their feature is and how it works. If needed, they may also add a link to more technical README's located nearer to the code.
 
-Whenever additions are made to the docs, make sure to update the `index.rst` in whichever folder the file has been added, and build the docs locally to confirm they work (TODO: add the `sphinx-build` command to our CI/CD flow).
+## Ubuntu 퀵셋업
 
-For example, if I wanted to add another file to the indy-sdk docs/ folder named `glossary.md`, I would create the file, and then add a reference to it in the `index.rst`: 
+
+1. 깃 클론
 ```
-.. toctree::
-  :maxdepth: 1
-  :hidden:
-
-  getting-started/index.rst
-  ...
-  key-concepts.md
-  ...
-  contributing/index.rst
-  ...
-  glossary.md                   .. <-- this is your new file!
-
+git clone https://github.com/hyperledger/indy-node.git
 ```
+
+
+2. 퀙셋업 
+```
+cd ./dev-setup/ubuntu
+./setup-dev-python.sh
+```
+
+3. 버추얼 영역 wrapping
+```
+source ~/.bashrc
+```
+
+4. 의존성 추가 (libindy, libindy-crypto, libsodium)
+```
+setup-dev-depend-ubuntu16.sh
+```
+
+
+5. indy-plenum 과 indy-node 포크하기
+
+indy-node와 동일폴더 경로로 이동
+
+6. 명령어 실행. indy-plenum and indy-node projects 클론
+
+./init-dev-project.sh <github-name> <new-virtualenv-name>
+
+
+8. Activate new virtualenv workon <new-virtualenv-namdfdfd
+
+
+
+9. [Optionally] Install Pycharm
+10. [Optionally] Open and configure projects in Pycharm:
+◦ Open both indy-plenum and indy-node in one window
+◦ Go to File -> Settings
+◦ Configure Project Interpreter to use just created virtualenv
+▪ Go to Project: <name> -> Project Interpreter
+▪ You’ll see indy-plenum and indy-node projects on the right side tab. For each of them:
+• Click on the project just beside “Project Interpreter” drop down, you’ll see one setting icon, click on it.
+• Select “Add Local”
+• Select existing virtualenv path as below: 
+◦ Configure Project Dependency
+▪ Go to Project: <name> -> Project Dependencies
+▪ Mark each project to be dependent on another one
+◦ Configure pytest
+▪ Go to Configure Tools -> Python Integrated tools
+▪ You’ll see indy-plenum and indy-node projects on the right side tab. For each of them:
+• Select Py.test from the ‘Default test runner’
+◦ Press Apply
+
 
 To add a new file to a subfolder, simply update the subfolder's `index.rst` with the relative link to your file.
 
